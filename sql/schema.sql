@@ -1,0 +1,15 @@
+DROP TABLE IF EXISTS files;
+
+CREATE TABLE files (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    filename VARCHAR(64) NOT NULL
+);
+
+DROP TABLE IF EXISTS metadata;
+
+CREATE TABLE metadata (
+    fileid INTEGER,
+    created DATETIME NOT NULL,
+    length INTEGER NOT NULL,
+    FOREIGN KEY(fileid) REFERENCES files ON DELETE CASCADE
+);

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -Eeuo pipefail
+set -x
+
+if ! test -e "var/audioserver.sqlite3"; then
+    ./bin/audioserverdb create
+fi
+export FLASK_ENV=development
+export FLASK_APP=audioserver
+flask run --host 0.0.0.0 --port 8000
