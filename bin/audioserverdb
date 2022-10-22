@@ -35,8 +35,8 @@ case $1 in
     ;;
   "dump")
     set -x
-    sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM files'
-    sqlite3 -batch -line var/insta485.sqlite3 'SELECT * FROM metadata'
+    sqlite3 -batch -line var/audioserver.sqlite3 'SELECT * FROM files'
+    sqlite3 -batch -line var/audioserver.sqlite3 'SELECT * FROM metadata'
     ;;
   *)
     usage

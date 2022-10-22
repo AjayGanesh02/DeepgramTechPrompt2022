@@ -6,3 +6,5 @@ APPLICATION_ROOT = '/'
 AS_ROOT = pathlib.Path(__file__).resolve().parent.parent
 UPLOAD_FOLDER = AS_ROOT/'var'/'uploads'
 ALLOWED_EXTENSIONS = set(['wav', 'mp3'])
+MAX_CONTENT_LENGTH = 16 * 1024 * 1024
+DATABASE_FILENAME = AS_ROOT/'var'/'audioserver.sqlite3'

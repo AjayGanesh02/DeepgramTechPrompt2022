@@ -1,8 +1,11 @@
+PRAGMA foreign_keys = ON;
+
 DROP TABLE IF EXISTS files;
 
 CREATE TABLE files (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    filename VARCHAR(64) NOT NULL
+    filename VARCHAR(64) NOT NULL,
+    origname VARCHAR(64) NOT NULL
 );
 
 DROP TABLE IF EXISTS metadata;

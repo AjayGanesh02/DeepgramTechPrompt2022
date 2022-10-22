@@ -1,1 +1,1 @@
-from audioserver.api.upload import show_index
+from audioserver.api.upload import handle_upload
