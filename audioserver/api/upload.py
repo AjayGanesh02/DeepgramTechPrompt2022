@@ -2,6 +2,7 @@ import flask
 import uuid
 import pathlib
 import audioserver
+from tinytag import TinyTag
 
 
 def allowed_file(filename):
@@ -38,14 +39,16 @@ def handle_upload():
     path = audioserver.app.config["UPLOAD_FOLDER"]/uuid_filename
     fileobj.save(path)
 
+    tag = TinyTag.get(path)
+
     connection = audioserver.model.get_db()
 
     connection.execute(
-        "INSERT INTO files (filename, origname) "
-        "VALUES (?, ?)",
-        (uuid_filename, filename, )
+        "INSERT INTO files (filename, origname, duration, filetype) "
+        "VALUES (?, ?, ?, ?)",
+        (uuid_filename, filename, int(tag.duration),
+         filename.rsplit('.', 1)[1].lower(), )
     )
-
     return flask.jsonify({
         'message': "success"
     })

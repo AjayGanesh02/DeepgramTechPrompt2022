@@ -45,3 +45,4 @@ wcwidth==0.2.5
 Werkzeug==2.2.2
 wrapt==1.14.1
 zipp==3.8.1
+tinytag==1.8.1

@@ -20,7 +20,6 @@ case $1 in
     set -x
     mkdir -p var/uploads
     sqlite3 var/audioserver.sqlite3 < sql/schema.sql
-    cp sql/uploads/* var/uploads/
     ;;
   "destroy")
     set -x
@@ -31,12 +30,10 @@ case $1 in
     rm -rf var/audioserver.sqlite3 var/uploads
     mkdir -p var/uploads
     sqlite3 var/audioserver.sqlite3 < sql/schema.sql
-    cp sql/uploads/* var/uploads/
     ;;
   "dump")
     set -x
     sqlite3 -batch -line var/audioserver.sqlite3 'SELECT * FROM files'
-    sqlite3 -batch -line var/audioserver.sqlite3 'SELECT * FROM metadata'
     ;;
   *)
     usage
