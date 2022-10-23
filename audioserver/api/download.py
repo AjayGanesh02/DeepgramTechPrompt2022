@@ -30,4 +30,4 @@ def handle_download():
             'message': "multiple files found"
         })
 
-    return flask.send_from_directory(audioserver.app.config["UPLOAD_FOLDER"], files[0]['filename'])
+    return flask.send_from_directory(audioserver.app.config["UPLOAD_FOLDER"], files[0]['filename'], as_attachment=True, download_name=origname)
