@@ -1,5 +1,4 @@
 import flask
-import pathlib
 import audioserver
 
 
@@ -10,7 +9,7 @@ def handle_download():
         return flask.jsonify({
             'message': "please specify a file to download"
         }), 400
-    
+
     origname = flask.request.args.get('name')
 
     connection = audioserver.model.get_db()
@@ -18,8 +17,17 @@ def handle_download():
     cur = connection.execute(
         "SELECT filename "
         "FROM files "
-        "WHERE origname == ?,"
+        "WHERE origname == ?",
         (origname, )
     )
-    file = cur.fetchall()
-    print(file)
+    files = cur.fetchall()
+    if len(files) < 1:
+        return flask.jsonify({
+            'message': "File not found"
+        }), 404
+    elif len(files) > 1:
+        return flask.jsonify({
+            'message': "multiple files found"
+        })
+
+    return flask.send_from_directory(audioserver.app.config["UPLOAD_FOLDER"], files[0]['filename'])
