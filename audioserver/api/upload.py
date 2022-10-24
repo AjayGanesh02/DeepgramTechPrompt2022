@@ -6,9 +6,10 @@ from tinytag import TinyTag
 
 
 def allowed_file(filename):
+    """Check if file is allowed filetype."""
     return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower(
-           ) in audioserver.app.config['ALLOWED_EXTENSIONS']
+           filename.rsplit('.', 1)[1].lower() in audioserver.app.config['ALLOWED_EXTENSIONS'] and \
+           TinyTag.is_supported(filename)
 
 
 @audioserver.app.route('/upload', methods=['POST'])
@@ -51,4 +52,4 @@ def handle_upload():
     )
     return flask.jsonify({
         'message': "success"
-    })
+    }), 201
